@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+[12:57 PM, 9/27/2026] Lale: <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -10,44 +10,230 @@
     p { margin-top: 0; color: #94a3b8; font-size: 0.95rem; }
     
     .search-box { margin: 20px auto; max-width: 380px; display: flex; gap: 8px; justify-content: center; }
-    .search-box input { width: 65%; padding: 12px; font-size: 1rem; border: 2px solid #334155; border-radius: 8px; background: #1e293b; color: #fff; outline: none; text-align: center; }
-    .search-box input:focus { border-color: #38bdf8; }
-    .search-box button { padding: 12px 18px; font-size: 1rem; font-weight: bold; border: none; border-radius: 8px; background: #38bdf8; color: #0f172a; cursor: pointer; transition: 0.2s; }
-    .search-box button:hover { background: #7dd3fc; }
+    .search-box input { width: 65%; padding: 12px; font-size: 1rem; border: 2px solid #334155; border-radius: 8px; background: #1e293b; color: #fff; outline: none; text-align: …
+[1:36 PM, 9/27/2026] Lale: <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BINGO PL - Cartones Online</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Arial Black', 'Impact', sans-serif;
+      text-align: center;
+      background: radial-gradient(circle at center, #1e52ba 0%, #0a1b42 100%);
+      color: #ffffff;
+      margin: 0;
+      padding: 15px;
+      min-height: 100vh;
+    }
 
-    .card-title { font-size: 1.3rem; font-weight: bold; color: #f8fafc; margin: 15px 0 5px 0; }
-    
-    .card { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; max-width: 360px; margin: 10px auto; background: #1e293b; padding: 12px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 1px solid #334155; }
-    .cell { background: #334155; border: 1px solid #475569; padding: 14px 2px; font-weight: bold; font-size: 1.1rem; cursor: pointer; user-select: none; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #fff; }
-    .cell.header { background: #facc15; color: #0f172a; font-size: 1.3rem; font-weight: 900; border: none; cursor: default; }
-    .cell.marked { background: #ef4444 !important; color: #fff !important; border-color: #dc2626 !important; border-radius: 50%; }
-    .cell.free { background: #22c55e; color: #fff; font-size: 0.85rem; border: none; }
-    
-    .actions { margin-top: 15px; }
-    .btn-reset { background: #475569; color: #fff; border: none; padding: 8px 16px; font-size: 0.9rem; border-radius: 6px; cursor: pointer; }
-    .btn-reset:hover { background: #64748b; }
+    /* Contenedor del Logo */
+    .logo-container {
+      max-width: 280px;
+      margin: 0 auto 10px auto;
+    }
+    .logo-img {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      border: 3px solid #ffd700;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #ffd700;
+      margin-bottom: 15px;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    /* Caja de Búsqueda estilo Casino */
+    .search-box {
+      margin: 15px auto 25px auto;
+      max-width: 360px;
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      border-radius: 12px;
+      border: 2px solid #ffd700;
+    }
+    .search-box input {
+      width: 65%;
+      padding: 12px;
+      font-size: 1.1rem;
+      border: 2px solid #ffffff;
+      border-radius: 8px;
+      background: #ffffff;
+      color: #000;
+      outline: none;
+      text-align: center;
+      font-weight: bold;
+    }
+    .search-box button {
+      padding: 12px 20px;
+      font-size: 1.1rem;
+      font-weight: 900;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(180deg, #ffd700 0%, #ff8c00 100%);
+      color: #000;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      text-transform: uppercase;
+    }
+    .search-box button:active { transform: scale(0.96); }
+
+    /* Letrero Rojo de Cartón */
+    .marquee-header {
+      background: #c00d1e;
+      border: 4px solid #ff3344;
+      border-radius: 15px;
+      padding: 10px 15px;
+      display: inline-block;
+      margin-bottom: 15px;
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.6), inset 0 0 10px rgba(255,255,255,0.3);
+      position: relative;
+    }
+    .marquee-title {
+      font-size: 1.5rem;
+      color: #ffffff;
+      text-shadow: 2px 2px 4px #000;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Estilo del Cartón */
+    .card-frame {
+      background: #c00d1e;
+      border: 6px solid #e11d48;
+      outline: 3px solid #ffd700;
+      border-radius: 20px;
+      padding: 12px;
+      max-width: 360px;
+      margin: 0 auto;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+    }
+
+    .card {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      background: #ffffff;
+      padding: 10px;
+      border-radius: 12px;
+    }
+
+    .cell {
+      background: #f1f5f9;
+      border: 2px solid #cbd5e1;
+      padding: 14px 2px;
+      font-weight: 900;
+      font-size: 1.2rem;
+      cursor: pointer;
+      user-select: none;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0f172a;
+    }
+
+    /* Fila B I N G O */
+    .cell.header {
+      background: linear-gradient(180deg, #ffd700 0%, #f59e0b 100%);
+      color: #000;
+      font-size: 1.4rem;
+      border: none;
+      cursor: default;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    }
+
+    /* Ficha / Bola Marcada */
+    .cell.marked {
+      background: radial-gradient(circle at 30% 30%, #ff4d4d, #990000) !important;
+      color: #ffffff !important;
+      border-color: #660000 !important;
+      border-radius: 50%;
+      box-shadow: inset 0 -3px 6px rgba(0,0,0,0.4), 0 3px 6px rgba(0,0,0,0.3);
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .cell.free {
+      background: #22c55e;
+      color: #fff;
+      font-size: 0.85rem;
+      border: none;
+    }
+
+    /* Botones de Acción */
+    .actions {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-bingo {
+      background: linear-gradient(180deg, #22c55e 0%, #15803d 100%);
+      color: #ffffff;
+      border: 2px solid #86efac;
+      padding: 12px 30px;
+      font-size: 1.2rem;
+      font-weight: 900;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(34, 197, 94, 0.4);
+      text-transform: uppercase;
+    }
+
+    .btn-reset {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.4);
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: sans-serif;
+    }
   </style>
 </head>
 <body>
 
-  <h1>Buscador de Cartones</h1>
-  <p>Ingresa el número de tu cartón para jugarlo</p>
+  <!-- Encabezado con tu Logo -->
+  <div class="logo-container">
+    <img src="https://raw.githubusercontent.com/alejandramchado0/mi-bingo-online/main/1000030946.png" alt="BINGO PL" class="logo-img" onerror="this.style.display='none'">
+  </div>
+  
+  <div class="subtitle">¡Ingresa el número de tu cartón para jugar!</div>
 
   <div class="search-box">
-    <input type="number" id="numCarton" placeholder="Ejemplo: 56" min="1" max="5000">
+    <input type="number" id="numCarton" placeholder="N° de Cartón" min="1" max="5000">
     <button onclick="buscarCarton()">Buscar</button>
   </div>
 
   <div id="contenido-carton" style="display: none;">
-    <div class="card-title" id="titulo-carton">Cartón #--</div>
-    <div id="bingo-card" class="card"></div>
+    <div class="marquee-header">
+      <h2 class="marquee-title" id="titulo-carton">Cartón #--</h2>
+    </div>
+
+    <div class="card-frame">
+      <div id="bingo-card" class="card"></div>
+    </div>
+
     <div class="actions">
+      <button class="btn-bingo" onclick="gritarBingo()">¡CANTAR BINGO!</button>
       <button class="btn-reset" onclick="limpiarMarcas()">Limpiar Marcas</button>
     </div>
   </div>
 
   <script>
-    // Generador matemático pseudoaleatorio basado en la semilla (Semilla = Número de Cartón)
     function pseudoRandom(seed) {
       let value = seed;
       return function() {
@@ -72,7 +258,6 @@
       const container = document.getElementById("bingo-card");
       container.innerHTML = "";
 
-      // Encabezados B I N G O
       const headers = ['B', 'I', 'N', 'G', 'O'];
       headers.forEach(h => {
         const div = document.createElement("div");
@@ -81,7 +266,6 @@
         container.appendChild(div);
       });
 
-      // Generar columnas fijas según la semilla del cartón
       const columnas = [
         obtenerNumerosSemilla(1, 15, 5, rng),
         obtenerNumerosSemilla(16, 30, 5, rng),
@@ -121,6 +305,11 @@
     function limpiarMarcas() {
       const celdas = document.querySelectorAll(".cell:not(.header):not(.free)");
       celdas.forEach(celda => celda.classList.remove("marked"));
+    }
+
+    function gritarBingo() {
+      const num = document.getElementById("numCarton").value;
+      alert("🎉 ¡BINGO REGISTRADO PARA EL CARTÓN #" + num + "! ¡Felicidades!");
     }
   </script>
 
