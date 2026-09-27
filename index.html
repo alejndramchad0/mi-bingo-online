@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Bingo Online</title>
+  <style>
+    body { font-family: 'Arial', sans-serif; text-align: center; background: #f0f2f5; margin: 0; padding: 20px; }
+    h1 { color: #1e272e; margin-bottom: 10px; }
+    .card { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; max-width: 360px; margin: 20px auto; background: #00a8ff; padding: 12px; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
+    .cell { background: #ffffff; border: 2px solid #0097e6; padding: 16px 5px; font-weight: bold; font-size: 1.2rem; cursor: pointer; user-select: none; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .cell.header { background: #fbc531; color: #2f3640; border-color: #e1b12c; font-size: 1.4rem; font-weight: 900; }
+    .cell.marked { background: #e84118; color: white; border-color: #c23616; border-radius: 50%; }
+    .cell.free { background: #4cd137; color: white; border-color: #44bd32; font-size: 0.9rem; }
+    .btn { background: #4cd137; color: white; border: none; padding: 12px 24px; font-size: 1.1rem; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .btn:active { transform: scale(0.98); }
+  </style>
+</head>
+<body>
+  <h1>¡Cartón de Bingo!</h1>
+  <p>Toca los números para marcarlos</p>
+  <div id="bingo-card" class="card"></div>
+  <button class="btn" onclick="generarCarton()">Generar Nuevo Cartón</button>
+
+  <script>
+    function generarCarton() {
+      const container = document.getElementById("bingo-card");
+      container.innerHTML = "";
+      
+      const headers = ['B', 'I', 'N', 'G', 'O'];
+      headers.forEach(h => {
+        const div = document.createElement("div");
+        div.className = "cell header";
+        div.innerText = h;
+        container.appendChild(div);
+      });
+
+      const columnas = [
+        obtenerNumerosSinRepetir(1, 15, 5),
+        obtenerNumerosSinRepetir(16, 30, 5),
+        obtenerNumerosSinRepetir(31, 45, 5),
+        obtenerNumerosSinRepetir(46, 60, 5),
+        obtenerNumerosSinRepetir(61, 75, 5)
+      ];
+
+      for (let fila = 0; fila < 5; fila++) {
+        for (let col = 0; col < 5; col++) {
+          const cell = document.createElement("div");
+          cell.className = "cell";
+          
+          if (fila === 2 && col === 2) {
+            cell.innerText = "LIBRE";
+            cell.classList.add("free", "marked");
+          } else {
+            cell.innerText = columnas[col][fila];
+            cell.onclick = function() {
+              this.classList.toggle("marked");
+            };
+          }
+          container.appendChild(cell);
+        }
+      }
+    }
+
+    function obtenerNumerosSinRepetir(min, max, cantidad) {
+      const numeros = [];
+      while (numeros.length < cantidad) {
+        const num = Math.floor(Math.random() * (max - min + 1)) + min;
+        if (!numeros.includes(num)) numeros.push(num);
+      }
+      return numeros;
+    }
+
+    window.onload = generarCarton;
+  </script>
+</body>
+</html>
