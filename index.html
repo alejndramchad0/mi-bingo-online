@@ -17,30 +17,13 @@
       margin: 0;
       padding: 15px 10px;
       min-height: 100vh;
+      /* Fondo seguro y nativo sin pseudo-elementos */
       background-color: #0b1a3e;
-      position: relative;
-    }
-
-    /* Imagen de fondo semitransparente que NO bloquea clics */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('1000030946.png');
-      background-position: center;
+      background-image: linear-gradient(rgba(11, 26, 62, 0.78), rgba(11, 26, 62, 0.78)), url('1000030946.png');
+      background-position: center top;
       background-repeat: no-repeat;
       background-size: contain;
-      opacity: 0.25;
-      z-index: 0;
-      pointer-events: none; /* Esto evita que el fondo intercepte los clics */
-    }
-
-    .main-container {
-      position: relative;
-      z-index: 10;
+      background-attachment: fixed;
     }
 
     .brand-title {
@@ -238,4 +221,164 @@
       font-size: 0.85rem;
       border-radius: 8px;
       cursor: pointer;
-      font-family
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="brand-title">BINGO PL</h1>
+  <div class="subtitle">Consulta uno o varios cartones al mismo tiempo</div>
+
+  <div class="search-box">
+    <div class="search-inputs">
+      <input type="text" id="numCarton" placeholder="Ej: 5  ó  3, 12, 25  ó  1-4">
+      <button type="button" onclick="buscarCartones()">BUSCAR</button>
+    </div>
+    <div class="search-hint">Ingresa cartones separados por comas (3, 7, 15) o rangos (1-4).</div>
+  </div>
+
+  <div id="panel-global" style="display: none;">
+    <div class="actions">
+      <button class="btn-bingo" type="button" onclick="gritarBingo()">¡CANTAR BINGO!</button>
+      <button class="btn-reset" type="button" onclick="limpiarMarcas()">Limpiar Marcas de Todos</button>
+    </div>
+
+    <div id="cards-wrapper" class="cards-wrapper"></div>
+  </div>
+
+  <script>
+    function pseudoRandom(seed) {
+      let value = seed;
+      return function() {
+        value = (value * 9301 + 49297) % 233280;
+        return value / 233280;
+      };
+    }
+
+    function procesarEntradaCartones(texto) {
+      const lista = [];
+      if (!texto) return lista;
+      const partes = texto.split(',');
+
+      partes.forEach(p => {
+        const tr = p.trim();
+        if (tr.includes('-')) {
+          const rango = tr.split('-');
+          const inicio = parseInt(rango[0]);
+          const fin = parseInt(rango[1]);
+          if (!isNaN(inicio) && !isNaN(fin) && inicio <= fin) {
+            for (let i = inicio; i <= fin; i++) {
+              if (i > 0 && !lista.includes(i)) lista.push(i);
+            }
+          }
+        } else {
+          const num = parseInt(tr);
+          if (!isNaN(num) && num > 0 && !lista.includes(num)) {
+            lista.push(num);
+          }
+        }
+      });
+
+      return lista;
+    }
+
+    function buscarCartones() {
+      const input = document.getElementById("numCarton").value;
+      const numerosCartones = procesarEntradaCartones(input);
+
+      if (numerosCartones.length === 0) {
+        alert("Por favor ingresa un número de cartón válido (Ej: 5).");
+        return;
+      }
+
+      if (numerosCartones.length > 20) {
+        alert("Se cargarán los primeros 20 cartones ingresados.");
+        numerosCartones.length = 20;
+      }
+
+      const wrapper = document.getElementById("cards-wrapper");
+      wrapper.innerHTML = "";
+      document.getElementById("panel-global").style.display = "block";
+
+      numerosCartones.forEach(num => {
+        crearCartonHTML(num, wrapper);
+      });
+    }
+
+    function crearCartonHTML(numero, contenedorPadre) {
+      const cartonDiv = document.createElement("div");
+      cartonDiv.className = "card-container";
+
+      cartonDiv.innerHTML = `
+        <div class="marquee-header">
+          <h2 class="marquee-title">Cartón #${numero}</h2>
+        </div>
+        <div class="card-frame">
+          <div class="card" id="card-${numero}"></div>
+        </div>
+      `;
+
+      contenedorPadre.appendChild(cartonDiv);
+
+      const container = document.getElementById(card-${numero});
+      const rng = pseudoRandom(numero);
+
+      const headers = ['B', 'I', 'N', 'G', 'O'];
+      headers.forEach(h => {
+        const div = document.createElement("div");
+        div.className = "cell header";
+        div.innerText = h;
+        container.appendChild(div);
+      });
+
+      const columnas = [
+        obtenerNumerosSemilla(1, 15, 5, rng),
+        obtenerNumerosSemilla(16, 30, 5, rng),
+        obtenerNumerosSemilla(31, 45, 5, rng),
+        obtenerNumerosSemilla(46, 60, 5, rng),
+        obtenerNumerosSemilla(61, 75, 5, rng)
+      ];
+
+      for (let fila = 0; fila < 5; fila++) {
+        for (let col = 0; col < 5; col++) {
+          const cell = document.createElement("div");
+          cell.className = "cell";
+
+          if (fila === 2 && col === 2) {
+            cell.innerText = "LIBRE";
+            cell.classList.add("free", "marked");
+          } else {
+            const valor = columnas[col][fila];
+            cell.innerText = valor;
+            
+            cell.onclick = function() {
+              this.classList.toggle("marked");
+            };
+          }
+          container.appendChild(cell);
+        }
+      }
+    }
+
+    function obtenerNumerosSemilla(min, max, cantidad, rng) {
+      const numeros = [];
+      while (numeros.length < cantidad) {
+        const num = Math.floor(rng() * (max - min + 1)) + min;
+        if (!numeros.includes(num)) numeros.push(num);
+      }
+      return numeros;
+    }
+
+    function limpiarMarcas() {
+      const celdas = document.querySelectorAll(".cell:not(.header):not(.free)");
+      celdas.forEach(celda => celda.classList.remove("marked"));
+    }
+
+    function gritarBingo() {
+      alert("🎉 ¡BINGO REGISTRADO! Se ha notificado la jugada.");
+    }
+  </script>
+
+</body>
+</html>
