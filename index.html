@@ -21,7 +21,7 @@
       /* FONDO EN MOSAICO REPETIDO */
       background-image: linear-gradient(rgba(11, 26, 62, 0.82), rgba(11, 26, 62, 0.82)), url('1000030946.png');
       background-repeat: repeat;
-      background-size: 150px auto; /* Ajusta el tamaño de cada patroncito del mosaico */
+      background-size: 140px auto;
       background-position: top left;
     }
 
@@ -192,32 +192,16 @@
     .actions {
       margin-top: 15px;
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .btn-bingo {
-      background: linear-gradient(180deg, #22c55e 0%, #15803d 100%);
-      color: #ffffff;
-      border: 2px solid #86efac;
-      padding: 10px 24px;
-      font-size: 1.1rem;
-      font-weight: 900;
-      border-radius: 25px;
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(34, 197, 94, 0.5);
-      text-transform: uppercase;
-      width: 100%;
-      max-width: 280px;
+      justify-content: center;
     }
 
     .btn-reset {
-      background: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.25);
       color: #ffffff;
-      border: 1px solid rgba(255,255,255,0.4);
-      padding: 8px 16px;
-      font-size: 0.85rem;
+      border: 1px solid rgba(255,255,255,0.5);
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      font-weight: bold;
       border-radius: 8px;
       cursor: pointer;
       font-family: sans-serif;
@@ -229,18 +213,17 @@
   <h1 class="brand-title">BINGO PL</h1>
   <div class="subtitle">Consulta uno o varios cartones al mismo tiempo</div>
 
-  <div class="search-box">
+  <form class="search-box" id="formBuscador" onsubmit="ejecutarBusqueda(event)">
     <div class="search-inputs">
-      <input type="text" id="numCarton" placeholder="Ej: 5  ó  3, 12, 25  ó  1-4">
-      <button type="button" onclick="buscarCartones()">BUSCAR</button>
+      <input type="text" id="numCarton" placeholder="Ej: 5  ó  3, 12, 25  ó  1-4" autocomplete="off">
+      <button type="submit" id="btnBuscar">BUSCAR</button>
     </div>
     <div class="search-hint">Ingresa cartones separados por comas (3, 7, 15) o rangos (1-4).</div>
-  </div>
+  </form>
 
   <div id="panel-global" style="display: none;">
     <div class="actions">
-      <button class="btn-bingo" type="button" onclick="gritarBingo()">¡CANTAR BINGO!</button>
-      <button class="btn-reset" type="button" onclick="limpiarMarcas()">Limpiar Marcas de Todos</button>
+      <button class="btn-reset" type="button" onclick="limpiarMarcas()">Limpiar Marcas</button>
     </div>
 
     <div id="cards-wrapper" class="cards-wrapper"></div>
@@ -282,7 +265,9 @@
       return lista;
     }
 
-    function buscarCartones() {
+    function ejecutarBusqueda(e) {
+      if (e) e.preventDefault();
+      
       const input = document.getElementById("numCarton").value;
       const numerosCartones = procesarEntradaCartones(input);
 
@@ -372,10 +357,6 @@
     function limpiarMarcas() {
       const celdas = document.querySelectorAll(".cell:not(.header):not(.free)");
       celdas.forEach(celda => celda.classList.remove("marked"));
-    }
-
-    function gritarBingo() {
-      alert("🎉 ¡BINGO REGISTRADO! Se ha notificado la jugada.");
     }
   </script>
 
