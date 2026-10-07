@@ -2,158 +2,186 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>BINGO PL - Cartones Online</title>
   <style>
-    * { box-sizing: border-box; }
+    * { 
+      box-sizing: border-box; 
+      -webkit-tap-highlight-color: transparent;
+    }
     
     body {
       font-family: 'Arial Black', 'Impact', sans-serif;
       text-align: center;
       color: #ffffff;
       margin: 0;
-      padding: 20px 15px;
+      padding: 15px 8px;
       min-height: 100vh;
-      background-color: #0d1b3e;
+      background-color: #0b1a3e;
       position: relative;
       overflow-x: hidden;
     }
 
-    /* Fondo con la imagen del logo en marca de agua semitransparente */
+    /* Fondo con el logotipo completo adaptado a teléfonos */
     body::before {
       content: "";
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90vw;
+      height: 90vh;
       background-image: url('1000030946.png');
       background-position: center;
       background-repeat: no-repeat;
-      background-size: cover;
-      opacity: 0.18; /* Transparencia suave para no molestar la lectura */
+      background-size: contain; /* Ajusta la imagen completa sin recortarla */
+      opacity: 0.22;
       z-index: -1;
       pointer-events: none;
     }
 
-    /* Título principal estilizado */
     .brand-title {
-      font-size: 2.8rem;
-      margin: 10px 0 5px 0;
+      font-size: 2.2rem;
+      margin: 5px 0 2px 0;
       color: #ffd700;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      text-shadow: 0 4px 10px rgba(0,0,0,0.8), 0 0 20px rgba(255, 215, 0, 0.5);
+      letter-spacing: 1.5px;
+      text-shadow: 0 3px 8px rgba(0,0,0,0.8), 0 0 15px rgba(255, 215, 0, 0.4);
     }
 
     .subtitle {
-      font-size: 1.1rem;
+      font-size: 0.9rem;
       color: #ffffff;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+      margin-bottom: 15px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
       font-weight: normal;
       font-family: sans-serif;
+      padding: 0 10px;
     }
 
-    /* Caja de Búsqueda */
+    /* Caja de Búsqueda Adaptada a Celular */
     .search-box {
-      margin: 0 auto 25px auto;
-      max-width: 380px;
+      margin: 0 auto 15px auto;
+      width: 100%;
+      max-width: 360px;
       display: flex;
-      gap: 10px;
-      justify-content: center;
-      background: rgba(10, 25, 60, 0.75);
-      backdrop-filter: blur(8px);
-      padding: 12px;
-      border-radius: 16px;
+      flex-direction: column;
+      gap: 8px;
+      background: rgba(10, 25, 60, 0.88);
+      backdrop-filter: blur(6px);
+      padding: 10px;
+      border-radius: 14px;
       border: 2px solid #ffd700;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
     }
+
+    .search-inputs {
+      display: flex;
+      gap: 6px;
+    }
+
     .search-box input {
-      width: 60%;
-      padding: 12px;
-      font-size: 1.1rem;
+      flex: 1;
+      padding: 10px 8px;
+      font-size: 1rem;
       border: 2px solid #ffffff;
-      border-radius: 10px;
+      border-radius: 8px;
       background: #ffffff;
       color: #000000;
       outline: none;
       text-align: center;
       font-weight: bold;
     }
+
     .search-box button {
-      padding: 12px 22px;
-      font-size: 1.1rem;
+      padding: 10px 16px;
+      font-size: 0.95rem;
       font-weight: 900;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       background: linear-gradient(180deg, #ffd700 0%, #ff8c00 100%);
       color: #000000;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.4);
       text-transform: uppercase;
     }
-    .search-box button:active { transform: scale(0.96); }
 
-    /* Letrero Rojo del Cartón */
+    .search-hint {
+      font-size: 0.75rem;
+      color: #cbd5e1;
+      font-family: sans-serif;
+      line-height: 1.1;
+    }
+
+    /* Contenedor Principal de Cartones */
+    .cards-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      margin-top: 15px;
+    }
+
+    /* Marco Individual de Cada Cartón en Celular */
+    .card-container {
+      width: 100%;
+      max-width: 350px;
+    }
+
     .marquee-header {
       background: #c00d1e;
       border: 3px solid #ff4d4d;
-      border-radius: 14px;
-      padding: 8px 20px;
-      display: inline-block;
-      margin-bottom: 15px;
-      box-shadow: 0 0 20px rgba(192, 13, 30, 0.7);
+      border-radius: 12px 12px 0 0;
+      padding: 6px 10px;
+      box-shadow: 0 0 12px rgba(192, 13, 30, 0.7);
     }
+
     .marquee-title {
-      font-size: 1.6rem;
+      font-size: 1.25rem;
       color: #ffffff;
       text-shadow: 2px 2px 4px #000;
       margin: 0;
       text-transform: uppercase;
     }
 
-    /* Marco del Cartón */
     .card-frame {
       background: rgba(192, 13, 30, 0.95);
-      border: 4px solid #ffd700;
-      border-radius: 20px;
-      padding: 12px;
-      max-width: 360px;
-      margin: 0 auto;
-      box-shadow: 0 12px 35px rgba(0,0,0,0.7);
+      border: 3px solid #ffd700;
+      border-top: none;
+      border-radius: 0 0 16px 16px;
+      padding: 8px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.7);
       backdrop-filter: blur(4px);
     }
 
     .card {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 6px;
+      gap: 4px;
       background: #ffffff;
-      padding: 10px;
-      border-radius: 12px;
+      padding: 6px;
+      border-radius: 10px;
     }
 
     .cell {
       background: #f8fafc;
       border: 2px solid #cbd5e1;
-      padding: 14px 2px;
+      padding: 12px 0;
       font-weight: 900;
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       cursor: pointer;
       user-select: none;
-      border-radius: 8px;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #0f172a;
     }
 
-    /* Fila B I N G O */
     .cell.header {
       background: linear-gradient(180deg, #ffd700 0%, #f59e0b 100%);
       color: #000000;
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       border: none;
       cursor: default;
     }
@@ -164,23 +192,23 @@
       color: #ffffff !important;
       border-color: #660000 !important;
       border-radius: 50%;
-      box-shadow: inset 0 -3px 6px rgba(0,0,0,0.4), 0 3px 6px rgba(0,0,0,0.3);
+      box-shadow: inset 0 -2px 4px rgba(0,0,0,0.4), 0 2px 5px rgba(0,0,0,0.3);
       text-shadow: 1px 1px 2px #000;
     }
 
     .cell.free {
       background: #22c55e;
       color: #ffffff;
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       border: none;
     }
 
-    /* Botones de Acción */
+    /* Panel de Acciones Global */
     .actions {
-      margin-top: 20px;
+      margin-top: 15px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       align-items: center;
     }
 
@@ -188,132 +216,11 @@
       background: linear-gradient(180deg, #22c55e 0%, #15803d 100%);
       color: #ffffff;
       border: 2px solid #86efac;
-      padding: 12px 32px;
-      font-size: 1.2rem;
+      padding: 10px 24px;
+      font-size: 1.1rem;
       font-weight: 900;
-      border-radius: 30px;
+      border-radius: 25px;
       cursor: pointer;
-      box-shadow: 0 6px 18px rgba(34, 197, 94, 0.5);
+      box-shadow: 0 4px 14px rgba(34, 197, 94, 0.5);
       text-transform: uppercase;
-    }
-
-    .btn-reset {
-      background: rgba(255,255,255,0.15);
-      color: #ffffff;
-      border: 1px solid rgba(255,255,255,0.4);
-      padding: 8px 18px;
-      font-size: 0.9rem;
-      border-radius: 8px;
-      cursor: pointer;
-      font-family: sans-serif;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Encabezado con Nombre de Marca -->
-  <h1 class="brand-title">BINGO PL</h1>
-  <div class="subtitle">Ingresa el número de tu cartón para consultar</div>
-
-  <div class="search-box">
-    <input type="number" id="numCarton" placeholder="N° de Cartón" min="1" max="5000">
-    <button onclick="buscarCarton()">Buscar</button>
-  </div>
-
-  <div id="contenido-carton" style="display: none;">
-    <div class="marquee-header">
-      <h2 class="marquee-title" id="titulo-carton">Cartón #--</h2>
-    </div>
-
-    <div class="card-frame">
-      <div id="bingo-card" class="card"></div>
-    </div>
-
-    <div class="actions">
-      <button class="btn-bingo" onclick="gritarBingo()">¡CANTAR BINGO!</button>
-      <button class="btn-reset" onclick="limpiarMarcas()">Limpiar Marcas</button>
-    </div>
-  </div>
-
-  <script>
-    function pseudoRandom(seed) {
-      let value = seed;
-      return function() {
-        value = (value * 9301 + 49297) % 233280;
-        return value / 233280;
-      };
-    }
-
-    function buscarCarton() {
-      const input = document.getElementById("numCarton").value;
-      const numero = parseInt(input);
-
-      if (!numero || numero < 1) {
-        alert("Por favor ingresa un número de cartón válido.");
-        return;
-      }
-
-      document.getElementById("titulo-carton").innerText = "Cartón #" + numero;
-      document.getElementById("contenido-carton").style.display = "block";
-
-      const rng = pseudoRandom(numero);
-      const container = document.getElementById("bingo-card");
-      container.innerHTML = "";
-
-      const headers = ['B', 'I', 'N', 'G', 'O'];
-      headers.forEach(h => {
-        const div = document.createElement("div");
-        div.className = "cell header";
-        div.innerText = h;
-        container.appendChild(div);
-      });
-
-      const columnas = [
-        obtenerNumerosSemilla(1, 15, 5, rng),
-        obtenerNumerosSemilla(16, 30, 5, rng),
-        obtenerNumerosSemilla(31, 45, 5, rng),
-        obtenerNumerosSemilla(46, 60, 5, rng),
-        obtenerNumerosSemilla(61, 75, 5, rng)
-      ];
-
-      for (let fila = 0; fila < 5; fila++) {
-        for (let col = 0; col < 5; col++) {
-          const cell = document.createElement("div");
-          cell.className = "cell";
-
-          if (fila === 2 && col === 2) {
-            cell.innerText = "LIBRE";
-            cell.classList.add("free", "marked");
-          } else {
-            cell.innerText = columnas[col][fila];
-            cell.onclick = function() {
-              this.classList.toggle("marked");
-            };
-          }
-          container.appendChild(cell);
-        }
-      }
-    }
-
-    function obtenerNumerosSemilla(min, max, cantidad, rng) {
-      const numeros = [];
-      while (numeros.length < cantidad) {
-        const num = Math.floor(rng() * (max - min + 1)) + min;
-        if (!numeros.includes(num)) numeros.push(num);
-      }
-      return numeros;
-    }
-
-    function limpiarMarcas() {
-      const celdas = document.querySelectorAll(".cell:not(.header):not(.free)");
-      celdas.forEach(celda => celda.classList.remove("marked"));
-    }
-
-    function gritarBingo() {
-      const num = document.getElementById("numCarton").value;
-      alert("🎉 ¡BINGO REGISTRADO PARA EL CARTÓN #" + num + "! ¡Felicidades!");
-    }
-  </script>
-
-</body>
-</html>
+      width: 100
