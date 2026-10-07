@@ -18,7 +18,6 @@
       padding: 15px 10px;
       min-height: 100vh;
       background-color: #0b1a3e;
-      /* FONDO EN MOSAICO REPETIDO */
       background-image: linear-gradient(rgba(11, 26, 62, 0.82), rgba(11, 26, 62, 0.82)), url('1000030946.png');
       background-repeat: repeat;
       background-size: 140px auto;
@@ -44,7 +43,6 @@
       padding: 0 10px;
     }
 
-    /* Caja de Búsqueda */
     .search-box {
       margin: 0 auto 15px auto;
       width: 100%;
@@ -99,7 +97,6 @@
       margin-top: 8px;
     }
 
-    /* Contenedor Principal de Cartones */
     .cards-wrapper {
       display: flex;
       flex-direction: column;
@@ -108,7 +105,6 @@
       margin-top: 15px;
     }
 
-    /* Cartón Individual */
     .card-container {
       width: 100%;
       max-width: 350px;
@@ -171,7 +167,6 @@
       cursor: default;
     }
 
-    /* Ficha Marcada */
     .cell.marked {
       background: radial-gradient(circle at 30% 30%, #ff4d4d, #990000) !important;
       color: #ffffff !important;
@@ -188,7 +183,6 @@
       border: none;
     }
 
-    /* Acciones */
     .actions {
       margin-top: 15px;
       display: flex;
@@ -213,13 +207,13 @@
   <h1 class="brand-title">BINGO PL</h1>
   <div class="subtitle">Consulta uno o varios cartones al mismo tiempo</div>
 
-  <form class="search-box" id="formBuscador" onsubmit="ejecutarBusqueda(event)">
+  <div class="search-box">
     <div class="search-inputs">
       <input type="text" id="numCarton" placeholder="Ej: 5  ó  3, 12, 25  ó  1-4" autocomplete="off">
-      <button type="submit" id="btnBuscar">BUSCAR</button>
+      <button type="button" id="btnBuscar">BUSCAR</button>
     </div>
     <div class="search-hint">Ingresa cartones separados por comas (3, 7, 15) o rangos (1-4).</div>
-  </form>
+  </div>
 
   <div id="panel-global" style="display: none;">
     <div class="actions">
@@ -265,10 +259,9 @@
       return lista;
     }
 
-    function ejecutarBusqueda(e) {
-      if (e) e.preventDefault();
-      
-      const input = document.getElementById("numCarton").value;
+    function buscarCartones() {
+      const inputElement = document.getElementById("numCarton");
+      const input = inputElement ? inputElement.value : "";
       const numerosCartones = procesarEntradaCartones(input);
 
       if (numerosCartones.length === 0) {
@@ -358,6 +351,25 @@
       const celdas = document.querySelectorAll(".cell:not(.header):not(.free)");
       celdas.forEach(celda => celda.classList.remove("marked"));
     }
+
+    // Asignación de eventos directa y segura
+    document.addEventListener("DOMContentLoaded", function() {
+      const btn = document.getElementById("btnBuscar");
+      const input = document.getElementById("numCarton");
+
+      if (btn) {
+        btn.addEventListener("click", buscarCartones);
+      }
+
+      if (input) {
+        input.addEventListener("keypress", function(e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            buscarCartones();
+          }
+        });
+      }
+    });
   </script>
 
 </body>
