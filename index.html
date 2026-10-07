@@ -2,145 +2,215 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>BINGO PL</title>
   <style>
-    * { box-sizing: border-box; }
+    * { 
+      box-sizing: border-box; 
+      -webkit-tap-highlight-color: transparent;
+    }
+    
     body { 
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-  text-align: center; 
-  color: #f8fafc; 
-  margin: 0; 
-  padding: 20px; 
-  background-color: #0d1b3e;
-  background-image: url('https://i.ibb.co/ymkSQVQ2/1000050238.png');
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-}
-      font-family: sans-serif;
-      text-align: center;
-      background: #0b1a3e;
-      color: #ffffff;
-      margin: 0;
-      padding: 15px 10px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      text-align: center; 
+      color: #f8fafc; 
+      margin: 0; 
+      padding: 15px 10px; 
+      background-color: #0d1b3e;
+      background-image: url('https://i.ibb.co/C38bLgtF/1000050238.png');
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
     }
-    .brand-title {
-      font-size: 2.2rem;
-      color: #ffd700;
-      margin: 10px 0 5px 0;
-      font-family: 'Impact', sans-serif;
+    
+    .brand-title { 
+      color: #ffd700; 
+      margin: 5px 0 2px 0; 
+      font-size: 2.2rem; 
+      font-family: 'Impact', 'Arial Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-shadow: 0 3px 8px rgba(0,0,0,0.9), 0 0 15px rgba(255, 215, 0, 0.5);
     }
-    .subtitle {
-      font-size: 0.9rem;
+    
+    .subtitle { 
+      margin-top: 0; 
+      color: #ffffff; 
+      font-size: 0.9rem; 
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9); 
       margin-bottom: 15px;
-      color: #e2e8f0;
     }
-    .search-box {
-      background: #1e293b;
+    
+    /* Caja de Búsqueda Adaptada para Pantallas Móviles */
+    .search-box { 
+      margin: 0 auto 15px auto; 
+      width: 100%;
+      max-width: 320px; 
+      display: flex; 
+      flex-direction: column;
+      gap: 10px; 
+      background: rgba(10, 25, 60, 0.92); 
       padding: 12px;
-      border-radius: 12px;
+      border-radius: 14px;
       border: 2px solid #ffd700;
-      max-width: 360px;
-      margin: 0 auto 15px auto;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
     }
-    .search-inputs {
-      display: flex;
-      gap: 6px;
-    }
-    input {
-      flex: 1;
-      padding: 10px;
-      font-size: 1rem;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      text-align: center;
+
+    .search-box input { 
+      width: 100%; 
+      padding: 12px 8px; 
+      font-size: 1rem; 
+      border: 2px solid #ffffff; 
+      border-radius: 8px; 
+      background: #ffffff; 
+      color: #000000; 
+      outline: none; 
+      text-align: center; 
       font-weight: bold;
     }
-    button {
-      padding: 10px 15px;
-      font-size: 1rem;
-      font-weight: bold;
-      background: #ffd700;
-      color: #000;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
+
+    .search-box button { 
+      width: 100%;
+      padding: 12px; 
+      font-size: 1rem; 
+      font-weight: 900; 
+      border: none; 
+      border-radius: 8px; 
+      background: linear-gradient(180deg, #ffd700 0%, #ff8c00 100%); 
+      color: #000000; 
+      cursor: pointer; 
+      box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+      text-transform: uppercase;
     }
+
+    .search-box button:active {
+      transform: scale(0.97);
+    }
+
+    .search-hint {
+      font-size: 0.75rem;
+      color: #cbd5e1;
+      font-family: sans-serif;
+      line-height: 1.1;
+    }
+
     .cards-wrapper {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 20px;
       align-items: center;
+      margin-top: 15px;
     }
+
     .card-container {
       width: 100%;
       max-width: 340px;
+    }
+
+    .marquee-header {
       background: #c00d1e;
-      border: 3px solid #ffd700;
-      border-radius: 12px;
-      padding: 8px;
+      border: 3px solid #ff4d4d;
+      border-radius: 12px 12px 0 0;
+      padding: 6px 10px;
+      box-shadow: 0 0 12px rgba(192, 13, 30, 0.7);
     }
+
     .marquee-title {
-      margin: 5px 0;
-      font-size: 1.2rem;
-      color: #fff;
+      font-size: 1.25rem;
+      color: #ffffff;
+      text-shadow: 2px 2px 4px #000;
+      margin: 0;
+      text-transform: uppercase;
+      font-family: 'Impact', 'Arial Black', sans-serif;
     }
-    .card {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 4px;
-      background: #fff;
-      padding: 6px;
-      border-radius: 8px;
+
+    .card-frame {
+      background: rgba(192, 13, 30, 0.95);
+      border: 3px solid #ffd700;
+      border-top: none;
+      border-radius: 0 0 16px 16px;
+      padding: 8px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.7);
     }
-    .cell {
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
-      padding: 10px 0;
-      font-weight: bold;
-      font-size: 1rem;
-      color: #0f172a;
-      border-radius: 4px;
+    
+    .card { 
+      display: grid; 
+      grid-template-columns: repeat(5, 1fr); 
+      gap: 4px; 
+      background: #ffffff; 
+      padding: 6px; 
+      border-radius: 10px; 
     }
-    .cell.header {
-      background: #ffd700;
-      color: #000;
+
+    .cell { 
+      background: #f8fafc; 
+      border: 2px solid #cbd5e1; 
+      padding: 12px 0; 
+      font-weight: 900; 
+      font-size: 1.1rem; 
+      cursor: pointer; 
+      user-select: none; 
+      border-radius: 6px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      color: #0f172a; 
     }
-    .cell.marked {
-      background: #c00d1e !important;
-      color: #fff !important;
-      border-radius: 50%;
+
+    .cell.header { 
+      background: linear-gradient(180deg, #ffd700 0%, #f59e0b 100%); 
+      color: #000000; 
+      font-size: 1.2rem; 
+      border: none; 
+      cursor: default; 
     }
-    .cell.free {
-      background: #22c55e;
-      color: #fff;
+
+    .cell.marked { 
+      background: radial-gradient(circle at 30% 30%, #ff4d4d, #990000) !important; 
+      color: #ffffff !important; 
+      border-color: #660000 !important; 
+      border-radius: 50%; 
+      box-shadow: inset 0 -2px 4px rgba(0,0,0,0.4), 0 2px 5px rgba(0,0,0,0.3);
+      text-shadow: 1px 1px 2px #000;
     }
-    .btn-reset {
-      background: rgba(255,255,255,0.2);
-      color: #fff;
-      border: 1px solid #fff;
-      padding: 8px 15px;
-      border-radius: 6px;
-      margin-bottom: 15px;
+
+    .cell.free { 
+      background: #22c55e; 
+      color: #ffffff; 
+      font-size: 0.75rem; 
+      border: none; 
+    }
+    
+    .actions { margin-top: 15px; }
+    
+    .btn-reset { 
+      background: rgba(255,255,255,0.25); 
+      color: #ffffff; 
+      border: 1px solid rgba(255,255,255,0.5); 
+      padding: 10px 20px; 
+      font-size: 0.9rem; 
+      font-weight: bold; 
+      border-radius: 8px; 
+      cursor: pointer; 
     }
   </style>
 </head>
 <body>
 
   <h1 class="brand-title">BINGO PL</h1>
-  <div class="subtitle">Ingresa tu número de cartón (Ej: 5 o 3, 8)</div>
+  <p class="subtitle">Ingresa tu número de cartón (Ej: 5 o 3, 8 o 1-4)</p>
 
   <div class="search-box">
-    <div class="search-inputs">
-      <input type="text" id="numCarton" placeholder="N° de Cartón">
-      <button type="button" id="btnBuscar">BUSCAR</button>
-    </div>
+    <input type="text" id="numCarton" placeholder="Ej: 5  ó  3, 12, 25  ó  1-4" autocomplete="off">
+    <button type="button" id="btnBuscar">BUSCAR</button>
+    <div class="search-hint">Ingresa cartones separados por comas o rangos.</div>
   </div>
 
-  <div id="panel" style="display:none;">
-    <button class="btn-reset" onclick="limpiarMarcas()">Limpiar Marcas</button>
+  <div id="contenido-carton" style="display: none;">
+    <div class="actions">
+      <button class="btn-reset" type="button" id="btnReset">Limpiar Marcas</button>
+    </div>
     <div id="cards-wrapper" class="cards-wrapper"></div>
   </div>
 
@@ -153,82 +223,13 @@
       };
     }
 
-    function obtenerNumeros(min, max, cantidad, rng) {
-      const nums = [];
-      while (nums.length < cantidad) {
-        const n = Math.floor(rng() * (max - min + 1)) + min;
-        if (!nums.includes(n)) nums.push(n);
-      }
-      return nums;
-    }
+    function procesarEntradaCartones(texto) {
+      const lista = [];
+      if (!texto) return lista;
+      const partes = texto.split(',');
 
-    function generarCarton(num) {
-      const wrapper = document.getElementById("cards-wrapper");
-      const rng = pseudoRandom(num);
-
-      const container = document.createElement("div");
-      container.className = "card-container";
-      container.innerHTML = <h3 class="marquee-title">Cartón #${num}</h3><div class="card" id="c-${num}"></div>;
-      wrapper.appendChild(container);
-
-      const grid = document.getElementById(c-${num});
-      const headers = ['B', 'I', 'N', 'G', 'O'];
-      headers.forEach(h => {
-        const div = document.createElement("div");
-        div.className = "cell header";
-        div.innerText = h;
-        grid.appendChild(div);
-      });
-
-      const cols = [
-        obtenerNumeros(1, 15, 5, rng),
-        obtenerNumeros(16, 30, 5, rng),
-        obtenerNumeros(31, 45, 5, rng),
-        obtenerNumeros(46, 60, 5, rng),
-        obtenerNumeros(61, 75, 5, rng)
-      ];
-
-      for (let f = 0; f < 5; f++) {
-        for (let c = 0; c < 5; c++) {
-          const cell = document.createElement("div");
-          cell.className = "cell";
-          if (f === 2 && c === 2) {
-            cell.innerText = "LIBRE";
-            cell.classList.add("free", "marked");
-          } else {
-            cell.innerText = cols[c][f];
-            cell.onclick = function() { this.classList.toggle("marked"); };
-          }
-          grid.appendChild(cell);
-        }
-      }
-    }
-
-    document.getElementById("btnBuscar").onclick = function() {
-      const input = document.getElementById("numCarton").value.trim();
-      if (!input) {
-        alert("Escribe al menos un número.");
-        return;
-      }
-
-      const wrapper = document.getElementById("cards-wrapper");
-      wrapper.innerHTML = "";
-      document.getElementById("panel").style.display = "block";
-
-      const partes = input.split(",");
       partes.forEach(p => {
-        const n = parseInt(p.trim());
-        if (!isNaN(n) && n > 0) {
-          generarCarton(n);
-        }
-      });
-    };
-
-    function limpiarMarcas() {
-      const celdas = document.querySelectorAll(".cell:not(.header):not(.free)");
-      celdas.forEach(c => c.classList.remove("marked"));
-    }
-  </script>
-
-</body>
-</html>
+        const tr = p.trim();
+        if (tr.includes('-')) {
+          const rango = tr.split('-');
+          const inicio =
